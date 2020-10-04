@@ -26,9 +26,11 @@
     "@types/react": "^16.9.49",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
+    "bootstrap": "^5.0.0-alpha2",
     "eslint": "^7.10.0",
     "eslint-plugin-react": "^7.21.2",
     "jest": "^26.4.2",
+    "sass": "^1.26.11",
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3"
   },

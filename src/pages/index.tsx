@@ -1,11 +1,17 @@
 import React from 'react';
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
 import { NextPage } from 'next';
+import { Introduction } from '../components/IntroductionComponent';
+import { ConversionComponent } from '../components/ConversionComponent';
 
 export default function Home(): JSX.Element {
     return (
-        <div>
-        </div>
+        <React.Fragment>
+            <Head key="title">
+                <title>Pocket to Evernote</title>
+            </Head>
+            <Introduction />
+            <ConversionComponent />
+        </React.Fragment>
     );
 }
