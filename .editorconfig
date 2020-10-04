@@ -10,3 +10,7 @@ insert_final_newline = false
 [*.json]
 indent_size = 2
 indent_style = space
+
+[src/testing/*.xml]
+indent_style = space
+indent_size = 2
