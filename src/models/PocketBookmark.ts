@@ -3,15 +3,15 @@ export class PocketBookmark {
     public readonly title: string;
     public readonly timeAdded: Date;
     public readonly tags: string[];
-    constructor(
+    constructor(props: {
         href: string,
         title: string,
         timeAdded: string,
         tags?: string
-    ) {
-        this.href = href;
-        this.title = title;
-        this.timeAdded = new Date(Number.parseInt(timeAdded, 10) * 1000);
-        this.tags = (tags || '').split(',')
+    }) {
+        this.href = props.href;
+        this.title = props.title;
+        this.timeAdded = new Date(Number.parseInt(props.timeAdded, 10) * 1000);
+        this.tags = (props.tags || '').split(',').filter((value) => !!value);
     }
 }

@@ -11,24 +11,29 @@ export class PocketExportParser {
 
     constructor(exportHtml: string) {
         this.exportDOM = new JSDOM(exportHtml, {
-            url: "https://example.org/",
-            referrer: "https://example.com/",
-            contentType: "text/html",
+            url: 'https://example.org/',
+            referrer: 'https://example.com/',
+            contentType: 'text/html',
             includeNodeLocations: false,
             storageQuota: 0
-          });
+        });
     }
 
-    public getUnreadBookmarks() {
+    public getUnreadBookmarks(): PocketBookmark[] {
         return this.getUnreadBookmarkElements().map(this.convertElementToModel);
     }
 
-    public getArchiveBookmarks() {
+    public getArchiveBookmarks(): PocketBookmark[] {
         return this.getReadArchiveBookmarkElements().map(this.convertElementToModel);
     }
 
-    private convertElementToModel(el: Element) {
-        return new PocketBookmark(el.getAttribute('href'), el.textContent, el.getAttribute('time_added'), el.getAttribute('tags'));
+    private convertElementToModel(el: Element): PocketBookmark {
+        return new PocketBookmark({
+            href: el.getAttribute('href'),
+            title: el.textContent,
+            timeAdded: el.getAttribute('time_added'),
+            tags: el.getAttribute('tags')
+        });
     }
 
     private getUnreadBookmarkElements() {
