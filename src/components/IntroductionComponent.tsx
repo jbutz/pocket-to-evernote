@@ -1,9 +1,7 @@
 export const Introduction = (): JSX.Element => (
     <section>
-        <p>Voluptate eos perferendis non consequuntur. Modi reiciendis impedit illum perspiciatis qui fugit in. Harum et reprehenderit blanditiis explicabo voluptas alias et optio.</p>
-        <p>Deserunt neque dolores pariatur quis facere. Omnis dolor sed laudantium error dolore. Facilis eveniet veritatis accusamus sit sint. Atque consequatur ratione maiores quam eum ab fuga. Amet temporibus omnis distinctio. Aut excepturi nam quos adipisci eos sed.</p>
-        <p>Voluptatem in ea sint beatae ullam id. Libero iste architecto voluptates ratione. Voluptatem est aut magnam culpa cumque.</p>
-        <p>Nisi nisi neque et dolor sequi repudiandae beatae. Nostrum iusto aliquid omnis ducimus. Dignissimos est iure quam deleniti blanditiis vero commodi.</p>
-        <p>Ipsum sed qui minus exercitationem. Vel ducimus tempora quis dicta. Aliquid aut perferendis odit cupiditate ad alias quidem. Nihil quaerat dolorem labore sapiente accusamus non assumenda. Distinctio vero et officia aut molestiae.</p>
+        <p>This application was built to convert a <a href="https://getpocket.com" target="_blank" rel="noreferrer">Pocket</a> bookmark export file into <a href="https://evernote.com" rel="noreferrer">Evernote</a> notes as part of migrating away from Pocket.
+        The application should work for any files matching the export format Pocket uses.</p>
+        <p>All efforts are taken to ensure your bookmarks stay your own. They are not uploaded to any servers and are processed on your own machine.</p>
     </section>
 );

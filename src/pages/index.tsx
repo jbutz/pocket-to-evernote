@@ -11,7 +11,8 @@ export default function Home(): JSX.Element {
                 <title>Pocket to Evernote</title>
             </Head>
             <Introduction />
-            <ConversionComponent />
+            <hr className="my-3"/>
+            <ConversionComponent className=""/>
         </React.Fragment>
     );
 }
