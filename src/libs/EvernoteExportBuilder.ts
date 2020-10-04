@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 import { create as createXml, fragment as createXmlFragment } from 'xmlbuilder2';
 import { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
-import { PocketBookmark } from "../models/PocketBookmark";
-import { EvernoteNoteBuilder } from "./EvernoteNoteBuilder";
+import { PocketBookmark } from '../models/PocketBookmark';
+import { EvernoteNoteBuilder } from './EvernoteNoteBuilder';
 
 export class EvernoteExportBuilder {
     constructor(private readonly evernoteNoteBuilder: EvernoteNoteBuilder) { }
@@ -28,16 +28,16 @@ export class EvernoteExportBuilder {
             .ele('note');
 
         noteEl.ele('title')
-            .txt(pocketBookmark.title)
+            .txt(pocketBookmark.title);
 
         noteEl.ele('content').dat(this.evernoteNoteBuilder.build(pocketBookmark));
 
         noteEl.ele('created').txt(EvernoteExportBuilder.formatDate(pocketBookmark.timeAdded));
         noteEl.ele('updated').txt(EvernoteExportBuilder.formatDate(pocketBookmark.timeAdded));
-        const noteAttributesEl = noteEl.ele('note-attributes')
-        noteAttributesEl.ele('source').txt('Pocket')
-        noteAttributesEl.ele('source-url').txt(pocketBookmark.href)
-        noteAttributesEl.ele('source-application').txt('Pocket to Evernote')
+        const noteAttributesEl = noteEl.ele('note-attributes');
+        noteAttributesEl.ele('source').txt('Pocket');
+        noteAttributesEl.ele('source-url').txt(pocketBookmark.href);
+        noteAttributesEl.ele('source-application').txt('Pocket to Evernote');
 
         pocketBookmark.tags.forEach((tag) => {
             noteEl.ele('tag').txt(tag);

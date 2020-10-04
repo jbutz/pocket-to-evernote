@@ -1,5 +1,5 @@
-import { PocketBookmark } from "../models/PocketBookmark";
-import { EvernoteExportBuilder } from "./EvernoteExportBuilder";
+import { PocketBookmark } from '../models/PocketBookmark';
+import { EvernoteExportBuilder } from './EvernoteExportBuilder';
 import { EvernoteNoteBuilder } from './EvernoteNoteBuilder';
 jest.mock('./EvernoteNoteBuilder');
 
@@ -30,7 +30,7 @@ describe('EvernoteExportBuilder', () => {
     describe('buildExport', () => {
         beforeAll(() => {
             jest.useFakeTimers('modern');
-            jest.setSystemTime(new Date('2020-10-04T14:53:44Z'))
+            jest.setSystemTime(new Date('2020-10-04T14:53:44Z'));
         });
         afterAll(() => {
             jest.useRealTimers();

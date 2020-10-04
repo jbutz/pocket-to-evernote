@@ -1,5 +1,5 @@
-import { PocketBookmark } from "../models/PocketBookmark";
-import { EvernoteNoteBuilder } from "./EvernoteNoteBuilder";
+import { PocketBookmark } from '../models/PocketBookmark';
+import { EvernoteNoteBuilder } from './EvernoteNoteBuilder';
 
 describe('EvernoteNoteBuilder', () => {
     let builder: EvernoteNoteBuilder;
@@ -16,5 +16,5 @@ describe('EvernoteNoteBuilder', () => {
         });
 
         expect(builder.build(exampleBookmark)).toMatchSnapshot();
-    })
+    });
 });
