@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "npm run lint -- --fix",
@@ -19,6 +20,11 @@
     "xmlbuilder2": "^2.4.0"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.31",
+    "@fortawesome/free-brands-svg-icons": "^5.15.0",
+    "@fortawesome/free-regular-svg-icons": "^5.15.0",
+    "@fortawesome/free-solid-svg-icons": "^5.15.0",
+    "@fortawesome/react-fontawesome": "^0.1.11",
     "@types/jest": "^26.0.14",
     "@types/jsdom": "^16.2.4",
     "@types/luxon": "^1.25.0",
@@ -26,9 +32,11 @@
     "@types/react": "^16.9.49",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
+    "bootstrap": "^5.0.0-alpha2",
     "eslint": "^7.10.0",
     "eslint-plugin-react": "^7.21.2",
     "jest": "^26.4.2",
+    "sass": "^1.26.11",
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3"
   },
