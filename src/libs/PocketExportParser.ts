@@ -7,16 +7,22 @@ enum List {
 }
 
 export class PocketExportParser {
-    private exportDOM: JSDOM;
+    private exportDOM: HTMLElement;
 
     constructor(exportHtml: string) {
-        this.exportDOM = new JSDOM(exportHtml, {
-            url: 'https://example.org/',
-            referrer: 'https://example.com/',
-            contentType: 'text/html',
-            includeNodeLocations: false,
-            storageQuota: 0
-        });
+        // this.exportDOM = new JSDOM(exportHtml, {
+        //     url: 'https://example.org/',
+        //     referrer: 'https://example.com/',
+        //     contentType: 'text/html',
+        //     includeNodeLocations: false,
+        //     storageQuota: 0
+        // });
+        debugger;
+        const iframeEl = window.document.createElement('iframe');
+        window.document.body.appendChild(iframeEl);
+        this.exportDOM = iframeEl.contentDocument.documentElement;
+        this.exportDOM.innerHTML = exportHtml;
+        debugger;
     }
 
     public getUnreadBookmarks(): PocketBookmark[] {
@@ -43,6 +49,6 @@ export class PocketExportParser {
         return this.getList(List.Last);
     }
     private getList(list: List) {
-        return Array.from(this.exportDOM.window.document.querySelectorAll(`h1:${list.toString()}+ul li>a`));
+        return Array.from(this.exportDOM.querySelectorAll(`h1:${list.toString()}+ul li>a`));
     }
 }
