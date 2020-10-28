@@ -10,19 +10,11 @@ export class PocketExportParser {
     private exportDOM: HTMLElement;
 
     constructor(exportHtml: string) {
-        // this.exportDOM = new JSDOM(exportHtml, {
-        //     url: 'https://example.org/',
-        //     referrer: 'https://example.com/',
-        //     contentType: 'text/html',
-        //     includeNodeLocations: false,
-        //     storageQuota: 0
-        // });
-        debugger;
         const iframeEl = window.document.createElement('iframe');
+        iframeEl.style.display = 'none';
         window.document.body.appendChild(iframeEl);
         this.exportDOM = iframeEl.contentDocument.documentElement;
         this.exportDOM.innerHTML = exportHtml;
-        debugger;
     }
 
     public getUnreadBookmarks(): PocketBookmark[] {

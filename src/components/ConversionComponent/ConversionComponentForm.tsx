@@ -13,13 +13,7 @@ export class ConversionComponentForm extends React.Component<{ className?: strin
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
-    componentDidMount() {
-        // this.fileInput.current.focus();
-        // this.tagInput.current.focus();
-      }
-
     handleFormSubmit() {
-        debugger;
         this.props.handleFormSubmit({
             file: this.fileInput.current,
             tag: this.tagInput.current,

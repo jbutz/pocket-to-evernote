@@ -4,13 +4,18 @@ import { EvernoteNoteBuilder } from "../../libs/EvernoteNoteBuilder";
 import { PocketExportParser } from "../../libs/PocketExportParser";
 import { ConversionComponentForm } from "./ConversionComponentForm";
 
-export class ConversionComponent extends React.Component<{ className?: string }> {
+export class ConversionComponent extends React.Component<{ className?: string }, {exportUrl: null | string}> {
     constructor(props) {
         super(props);
+        this.state = {
+            exportUrl: null
+        };
+
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
     async handleFormSubmit(event: { file: HTMLInputElement, tag: HTMLInputElement }) {
-        debugger;
+        
         const file = event.file.files.item(0) || null;
         if(!file) {
             throw new Error('No File');
@@ -19,10 +24,9 @@ export class ConversionComponent extends React.Component<{ className?: string }>
         if(file.name.endsWith('.html') === false) {
             throw new Error('Wrong Extension');
         }
-        debugger;
 
         const unreadTag = event.tag.value.trim();
-        
+        console.time('Pocket Export Processing');
         const fileContents = await file.text();
 
         const pocketParser = new PocketExportParser(fileContents);
@@ -37,14 +41,26 @@ export class ConversionComponent extends React.Component<{ className?: string }>
                 ].filter((bookmark) => !!bookmark)
             })),
         ];
-
+        console.timeEnd('Pocket Export Processing');
+        console.time('Evernote Export Building');
         const exportBuilder = new EvernoteExportBuilder(new EvernoteNoteBuilder());
 
         const evernoteExport = exportBuilder.buildExport(pocketBookmarks);
-        
+        console.timeEnd('Evernote Export Building');
+        console.log('Export Length in characters', evernoteExport.length);
+
+        const exportBlob = new Blob([ evernoteExport ], { type: 'application/octet-stream' });
+        this.setState({
+            exportUrl: URL.createObjectURL(exportBlob)
+        });
     }
 
     render() {
-        return <ConversionComponentForm className={this.props.className} handleFormSubmit={this.handleFormSubmit} />
+        return (
+            <React.Fragment>
+                {!this.state.exportUrl && <ConversionComponentForm className={this.props.className} handleFormSubmit={this.handleFormSubmit} />}
+                {this.state.exportUrl && <a href={this.state.exportUrl} download="export.enex">Download</a>}
+            </React.Fragment>
+        )
     }
 }
