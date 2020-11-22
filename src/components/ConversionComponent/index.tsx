@@ -16,7 +16,7 @@ export class ConversionComponent extends React.Component<{ className?: string },
         
         const file = event.file.files.item(0) || null;
         const unreadTag = event.tag.value.trim();
-        const exportBlob = Converter.convert(file, unreadTag);
+        const exportBlob = await Converter.convert(file, unreadTag);
         
         this.setState({
             exportUrl: URL.createObjectURL(exportBlob)

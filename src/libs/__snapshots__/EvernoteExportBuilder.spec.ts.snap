@@ -48,3 +48,21 @@ exports[`EvernoteExportBuilder buildExport builds an export for 2 bookmark2 1`] 
   </note>
 </en-export>"
 `;
+
+exports[`EvernoteExportBuilder buildExport shortens bookmarktitles 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+<!DOCTYPE en-export SYSTEM \\"http://xml.evernote.com/pub/evernote-export3.dtd\\">
+<en-export export-date=\\"20201004T145344Z\\" application=\\"Pocket to Evernote\\" version=\\"Pocket to Evernote\\">
+  <note>
+    <title>123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012...</title>
+    <content><![CDATA[<en-note />]]></content>
+    <created>20200625T140510Z</created>
+    <updated>20200625T140510Z</updated>
+    <note-attributes>
+      <source>Pocket</source>
+      <source-url>https://example.com</source-url>
+      <source-application>Pocket to Evernote</source-application>
+    </note-attributes>
+  </note>
+</en-export>"
+`;
