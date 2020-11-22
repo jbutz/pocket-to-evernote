@@ -54,7 +54,7 @@ export class EvernoteExportBuilder {
     static formatNoteTitle(input: string): string {
         const trimmedTitle = input.trim();
         if(trimmedTitle.length > MAX_TITLE_LENGTH) {
-            return `${trimmedTitle.substring(MAX_TITLE_LENGTH - 3)}...`
+            return `${trimmedTitle.substring(MAX_TITLE_LENGTH - 3)}...`;
         }
         return trimmedTitle;
     }
