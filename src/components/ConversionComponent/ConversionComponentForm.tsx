@@ -1,11 +1,15 @@
-import React from "react";
+import React from 'react';
 
-;
-export class ConversionComponentForm extends React.Component<{ className?: string; handleFormSubmit: Function }> {
+interface ConversionComponentFormProps {
+    className?: string;
+    handleFormSubmit:  (args: {file: HTMLInputElement, tag: HTMLInputElement}) => void
+}
+
+export class ConversionComponentForm extends React.Component<ConversionComponentFormProps> {
     private fileInput: React.RefObject<HTMLInputElement>;
     private tagInput: React.RefObject<HTMLInputElement>
 
-    constructor(props) {
+    constructor(props: ConversionComponentFormProps) {
         super(props);
 
         this.fileInput = React.createRef();
@@ -13,14 +17,14 @@ export class ConversionComponentForm extends React.Component<{ className?: strin
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
-    handleFormSubmit() {
+    handleFormSubmit(): void {
         this.props.handleFormSubmit({
             file: this.fileInput.current,
             tag: this.tagInput.current,
-        })
+        });
     }
 
-    render() {
+    render(): JSX.Element {
         return (
             <section className={`${this.props.className || ''}`}><div>
                 <div className="mb-3">

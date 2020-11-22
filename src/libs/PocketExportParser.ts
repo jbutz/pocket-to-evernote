@@ -1,4 +1,3 @@
-import { JSDOM } from 'jsdom';
 import { PocketBookmark } from '../models/PocketBookmark';
 
 enum List {

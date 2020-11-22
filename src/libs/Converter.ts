@@ -1,6 +1,6 @@
-import { EvernoteExportBuilder } from "./EvernoteExportBuilder";
-import { EvernoteNoteBuilder } from "./EvernoteNoteBuilder";
-import { PocketExportParser } from "./PocketExportParser";
+import { EvernoteExportBuilder } from './EvernoteExportBuilder';
+import { EvernoteNoteBuilder } from './EvernoteNoteBuilder';
+import { PocketExportParser } from './PocketExportParser';
 
 export class Converter {
     static async convert(file: File, unreadTag: string): Promise<Blob> {

@@ -1,8 +1,7 @@
-import React from 'react';
 import Head from 'next/head';
-import { NextPage } from 'next';
-import { Introduction } from '../components/IntroductionComponent';
+import React from 'react';
 import { ConversionComponent } from '../components/ConversionComponent';
+import { Introduction } from '../components/IntroductionComponent';
 
 export default function Home(): JSX.Element {
     return (
