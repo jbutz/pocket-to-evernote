@@ -4,6 +4,7 @@ import { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
 import { PocketBookmark } from '../models/PocketBookmark';
 import { EvernoteNoteBuilder } from './EvernoteNoteBuilder';
 
+const MAX_TITLE_LENGTH = 255;
 export class EvernoteExportBuilder {
     constructor(private readonly evernoteNoteBuilder: EvernoteNoteBuilder) { }
 
@@ -28,7 +29,7 @@ export class EvernoteExportBuilder {
             .ele('note');
 
         noteEl.ele('title')
-            .txt(pocketBookmark.title);
+            .txt(EvernoteExportBuilder.formatNoteTitle(pocketBookmark.title));
 
         noteEl.ele('content').dat(this.evernoteNoteBuilder.build(pocketBookmark));
 
@@ -48,5 +49,13 @@ export class EvernoteExportBuilder {
 
     static formatDate(input: Date): string {
         return DateTime.fromJSDate(input).toUTC().toFormat('yyyyMMdd\'T\'HHmmss\'Z\'');
+    }
+
+    static formatNoteTitle(input: string): string {
+        const trimmedTitle = input.trim();
+        if(trimmedTitle.length > MAX_TITLE_LENGTH) {
+            return `${trimmedTitle.substring(MAX_TITLE_LENGTH - 3)}...`
+        }
+        return trimmedTitle;
     }
 }
