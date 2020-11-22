@@ -33,7 +33,7 @@ export class ConversionComponentForm extends React.Component<{ className?: strin
                     <input type="text" className="form-control" id="unreadTagName" aria-describedby="unreadTagNameHelp" defaultValue="read-it-later" ref={this.tagInput} />
                     <div id="unreadTagNameHelp" className="form-text">This tag is applied to all notes for items that were unread in the Pocket export. Leave it blank to skip this feature.</div>
                 </div>
-                <button type="button" className="btn btn-primary" onClick={this.handleFormSubmit}>Build My Evernote File</button>
+                <div className="text-center"><button type="button" className="btn btn-primary" onClick={this.handleFormSubmit}>Build My Evernote File</button></div>
             </div></section>
         );
     }
