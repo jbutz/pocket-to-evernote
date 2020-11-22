@@ -4,6 +4,7 @@ import { EvernoteNoteBuilder } from './EvernoteNoteBuilder';
 jest.mock('./EvernoteNoteBuilder');
 
 describe('EvernoteExportBuilder', () => {
+    const maxTitleLengthLessThreeCharacters = '123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012';
     let noteBuilder: EvernoteNoteBuilder;
     beforeEach(() => {
         noteBuilder = new EvernoteNoteBuilder();
@@ -24,6 +25,19 @@ describe('EvernoteExportBuilder', () => {
         ])('formats "%s"', (dateInitValue, expected) => {
             const inputDate = new Date(dateInitValue);
             expect(EvernoteExportBuilder.formatDate(inputDate)).toEqual(expected);
+        });
+    });
+
+    describe('formatNoteTitle', () => {
+        it('trims whitespace', () => {
+            expect(EvernoteExportBuilder.formatNoteTitle(' sample ')).toEqual('sample');
+        });
+        it('truncates long titles', () => {
+            expect(EvernoteExportBuilder.formatNoteTitle(`${maxTitleLengthLessThreeCharacters}34567890`))
+                .toEqual(`${maxTitleLengthLessThreeCharacters}...`);
+        });
+        it('leaves shorter titles untouched', () => {
+            expect(EvernoteExportBuilder.formatNoteTitle('sample')).toEqual('sample');
         });
     });
 
@@ -64,6 +78,19 @@ describe('EvernoteExportBuilder', () => {
                     title: 'Example Bookmark Number 2',
                     timeAdded: '1503093910',
                     tags: 'example,two'
+                })
+            ])).toMatchSnapshot();
+        });
+
+        it('shortens bookmarktitles', async () => {
+            const exportBuilder = new EvernoteExportBuilder(noteBuilder);
+
+            expect(exportBuilder.buildExport([
+                new PocketBookmark({
+                    href: 'https://example.com',
+                    title: `${maxTitleLengthLessThreeCharacters}34567890`,
+                    timeAdded: '1593093910',
+                    tags: ''
                 })
             ])).toMatchSnapshot();
         });
