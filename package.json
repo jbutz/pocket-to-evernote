@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "npm run lint -- --fix",
-    "test": "jest"
+    "test": "jest",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
   },
   "dependencies": {
     "jsdom": "^16.4.0",

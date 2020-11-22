@@ -1,15 +1,34 @@
-export const ConversionComponent = (props: { className?: string }): JSX.Element => (
-    <section className={`${props.className || ''}`}><div>
-        <div className="mb-3">
-            <label htmlFor="pocketFile" className="form-label">Pocket Export File</label>
-            <input type="file" className="form-control" id="pocketFile" aria-describedby="pocketFileHelp" />
-            <div id="pocketFileHelp" className="form-text">This file is never sent to the servers and stays entirely private.</div>
-        </div>
-        <div className="mb-3">
-            <label htmlFor="unreadTagName" className="form-label">Unread Tag</label>
-            <input type="text" className="form-control" id="unreadTagName" aria-describedby="unreadTagNameHelp" defaultValue="read-it-later" />
-            <div id="unreadTagNameHelp" className="form-text">This tag is applied to all notes for items that were unread in the Pocket export. Leave it blank to skip this feature.</div>
-        </div>
-        <button type="button" className="btn btn-primary">Build My Evernote File</button>
-    </div></section>
-);
+import React from 'react';
+import { Converter } from '../../libs/Converter';
+import { ConversionComponentForm } from './ConversionComponentForm';
+
+export class ConversionComponent extends React.Component<{ className?: string }, {exportUrl: null | string}> {
+    constructor(props: { className?: string }) {
+        super(props);
+        this.state = {
+            exportUrl: null
+        };
+
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    }
+
+    async handleFormSubmit(event: { file: HTMLInputElement, tag: HTMLInputElement }): Promise<void> {
+        
+        const file = event.file.files.item(0) || null;
+        const unreadTag = event.tag.value.trim();
+        const exportBlob = Converter.convert(file, unreadTag);
+        
+        this.setState({
+            exportUrl: URL.createObjectURL(exportBlob)
+        });
+    }
+
+    render(): JSX.Element {
+        return (
+            <React.Fragment>
+                {!this.state.exportUrl && <ConversionComponentForm className={this.props.className} handleFormSubmit={this.handleFormSubmit} />}
+                {this.state.exportUrl && <div className="text-center"><a className="btn btn-primary " href={this.state.exportUrl} download="export.enex">Download</a></div>}
+            </React.Fragment>
+        );
+    }
+}

@@ -1,4 +1,3 @@
-import { JSDOM } from 'jsdom';
 import { PocketBookmark } from '../models/PocketBookmark';
 
 enum List {
@@ -7,16 +6,14 @@ enum List {
 }
 
 export class PocketExportParser {
-    private exportDOM: JSDOM;
+    private exportDOM: HTMLElement;
 
     constructor(exportHtml: string) {
-        this.exportDOM = new JSDOM(exportHtml, {
-            url: 'https://example.org/',
-            referrer: 'https://example.com/',
-            contentType: 'text/html',
-            includeNodeLocations: false,
-            storageQuota: 0
-        });
+        const iframeEl = window.document.createElement('iframe');
+        iframeEl.style.display = 'none';
+        window.document.body.appendChild(iframeEl);
+        this.exportDOM = iframeEl.contentDocument.documentElement;
+        this.exportDOM.innerHTML = exportHtml;
     }
 
     public getUnreadBookmarks(): PocketBookmark[] {
@@ -43,6 +40,6 @@ export class PocketExportParser {
         return this.getList(List.Last);
     }
     private getList(list: List) {
-        return Array.from(this.exportDOM.window.document.querySelectorAll(`h1:${list.toString()}+ul li>a`));
+        return Array.from(this.exportDOM.querySelectorAll(`h1:${list.toString()}+ul li>a`));
     }
 }
